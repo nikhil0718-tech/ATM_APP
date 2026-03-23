@@ -4,7 +4,7 @@ import "./App.css";
 // -------------------- Custom Exceptions --------------------
 
 
-const API ="https://your-render-url.onrender.com/api/test/";
+const API ="https://atm-backend-ijqf.onrender.com/api/test/";
 
 export default function App() {
 
