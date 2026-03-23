@@ -11,42 +11,47 @@ def test_api(request):
 # ---------------- REGISTER ----------------
 @csrf_exempt
 def register(request):
-    if request.method == "POST":
+    if request.method != "POST":
+        return JsonResponse({"msg": "Invalid request method"})
+
+    try:
         data = json.loads(request.body)
+    except:
+        return JsonResponse({"msg": "Invalid JSON data"})
 
-        username = data.get("username")
-        pin = data.get("pin")
+    username = data.get("username")
+    pin = data.get("pin")
 
-        if not username or not pin:
-            return JsonResponse({"msg": "Enter valid details."})
+    if not username or not pin:
+        return JsonResponse({"msg": "Enter valid details."})
 
-        if User.objects.filter(username=username).exists():
-            return JsonResponse({"msg": "Username already exists"})
+    if User.objects.filter(username=username).exists():
+        return JsonResponse({"msg": "Username already exists"})
 
+    try:
         User.objects.create(username=username, pin=pin)
-
         return JsonResponse({"msg": "Account created successfully"})
-
-    return JsonResponse({"msg": "Invalid request"})
-
-
+    except Exception as e:
+        return JsonResponse({"msg": f"Error: {str(e)}"})
 # ---------------- LOGIN ----------------
 @csrf_exempt
 def login(request):
-    if request.method == "POST":
+    if request.method != "POST":
+        return JsonResponse({"msg": "Invalid request method"})
+
+    try:
         data = json.loads(request.body)
+    except:
+        return JsonResponse({"msg": "Invalid JSON"})
 
-        username = data.get("username")
-        pin = data.get("pin")
+    username = data.get("username")
+    pin = data.get("pin")
 
-        try:
-            user = User.objects.get(username=username, pin=pin)
-            return JsonResponse({"msg": "success", "id": user.id})
-        except User.DoesNotExist:
-            return JsonResponse({"msg": "fail"})
-
-    return JsonResponse({"msg": "Invalid request"})
-
+    try:
+        user = User.objects.get(username=username, pin=pin)
+        return JsonResponse({"msg": "success", "id": user.id})
+    except User.DoesNotExist:
+        return JsonResponse({"msg": "fail"})
 
 # ---------------- DEPOSIT ----------------
 @csrf_exempt
