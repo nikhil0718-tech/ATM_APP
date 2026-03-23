@@ -4,8 +4,7 @@ import "./App.css";
 // -------------------- Custom Exceptions --------------------
 
 
-const API ="https://atm-backend-ijqf.onrender.com/api/test/";
-
+const API ="https://atm-backend-ijqf.onrender.com/api/";
 export default function App() {
 
   const [section, setSection] = useState("register");
