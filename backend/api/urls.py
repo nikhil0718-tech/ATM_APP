@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import test_api
+
 urlpatterns = [
     path('test/', views.test_api),
 
