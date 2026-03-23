@@ -13,5 +13,4 @@ urlpatterns = [
     path('transactions/<int:id>/', views.get_transactions),
     path('account/<int:id>/', views.account_details),
     path('test/', test_api),
-    path('api/', include('api.urls')),
 ]
