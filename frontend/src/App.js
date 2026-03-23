@@ -4,7 +4,7 @@ import "./App.css";
 // -------------------- Custom Exceptions --------------------
 
 
-const API = "http://127.0.0.1:8000/api/";
+const API ="https://your-render-url.onrender.com/api/test/";
 
 export default function App() {
 

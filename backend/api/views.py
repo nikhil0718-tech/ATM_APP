@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Transaction
 
+def test_api(request):
+    return JsonResponse({"message": "API working"})
 
 # ---------------- REGISTER ----------------
 @csrf_exempt
